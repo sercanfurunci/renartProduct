@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+
 const initialState = {
   products: [],
   loading: false,
@@ -19,7 +20,7 @@ export const getGoldPrice = createAsyncThunk(
   async () => {
     const response = await axios.get("https://www.goldapi.io/api/XAU/USD", {
       headers: {
-        // "x-access-token": "goldapi-45f3dsmct1b2jz-io",
+        "x-access-token": import.meta.env.VITE_GOLD_API_KEY,
         "Content-Type": "application/json",
       },
     });
