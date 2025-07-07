@@ -15,13 +15,13 @@ function ProductList() {
 
   useEffect(() => {
     dispatch(getAllProducts());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(getGoldPrice()).then(() => {
       dispatch(calculatePrice());
     });
-  }, []);
+  }, [dispatch]);
 
   const scrollLeft = () => {
     if (scrollRef.current) {

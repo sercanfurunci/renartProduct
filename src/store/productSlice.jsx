@@ -9,6 +9,7 @@ const initialState = {
 };
 
 const BASE_URL = "https://product-api-v75n.onrender.com";
+const GOLD_URL = "https://api.gold-api.com/price/XAU";
 
 export const getAllProducts = createAsyncThunk("products", async () => {
   const response = await axios.get(`${BASE_URL}/products`);
@@ -18,13 +19,11 @@ export const getAllProducts = createAsyncThunk("products", async () => {
 export const getGoldPrice = createAsyncThunk(
   "products/getGoldPrice",
   async () => {
-    const response = await axios.get("https://www.goldapi.io/api/XAU/USD", {
+    const response = await axios.get(GOLD_URL, {
       headers: {
-        "x-access-token": import.meta.env.VITE_GOLD_API_KEY,
         "Content-Type": "application/json",
       },
     });
-    console.log(response);
     return response.data.price;
   }
 );
