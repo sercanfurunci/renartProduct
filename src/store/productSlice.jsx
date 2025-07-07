@@ -7,7 +7,7 @@ const initialState = {
   goldPrice: 0,
 };
 
-const BASE_URL = "http://localhost:3005";
+const BASE_URL = "https://product-api-v75n.onrender.com";
 
 export const getAllProducts = createAsyncThunk("products", async () => {
   const response = await axios.get(`${BASE_URL}/products`);
@@ -53,24 +53,11 @@ export const productSlice = createSlice({
       .addCase(getAllProducts.fulfilled, (state, action) => {
         state.products = action.payload;
         state.loading = false;
-      })
-      .addCase(getAllProducts.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message;
       });
 
-    builder
-      .addCase(getGoldPrice.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(getGoldPrice.fulfilled, (state, action) => {
-        state.goldPrice = action.payload;
-        state.loading = false;
-      })
-      .addCase(getGoldPrice.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message;
-      });
+    builder.addCase(getGoldPrice.fulfilled, (state, action) => {
+      state.goldPrice = action.payload;
+    });
   },
 });
 

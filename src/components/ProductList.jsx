@@ -11,6 +11,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 function ProductList() {
   const dispatch = useDispatch();
   const scrollRef = useRef(null);
+  const { products } = useSelector((store) => store.product);
 
   useEffect(() => {
     dispatch(getAllProducts());
@@ -21,8 +22,6 @@ function ProductList() {
       dispatch(calculatePrice());
     });
   }, []);
-
-  const { products } = useSelector((store) => store.product);
 
   const scrollLeft = () => {
     if (scrollRef.current) {
