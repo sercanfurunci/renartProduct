@@ -22,14 +22,14 @@ Bu proje, [product-api](https://github.com/sercanfurunci/product-api) üzerinden
 git clone https://github.com/sercanfurunci/product-api.git
 cd product-api
 npm install
-npm start
+json-server --watch db.json
 ``` 
 
 
 ### 2. FrontEnd 
+
+
 ```bash
-
-
 git clone https://github.com/sercanfurunci/renartProduct.git
 cd renartProduct
 npm install
