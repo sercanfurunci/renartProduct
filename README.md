@@ -27,8 +27,12 @@ npm start
 
 
 ### 2. FrontEnd 
+```bash
+
+
 git clone https://github.com/sercanfurunci/renartProduct.git
 cd renartProduct
 npm install
 npm start
+``` 
 
