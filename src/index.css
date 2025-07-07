@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: Avenir;
+  src: url('/public/fonts/avenir/Avenir-Book.ttf') ;
+  
+}
+
+@font-face {
+  font-family: MontserratRegular;
+  src: url('/public/fonts/montserrat/Montserrat-Regular.ttf');
+}
+@font-face {
+  font-family: MontserratMedium;
+  src: url('/public/fonts/montserrat/Montserrat-Medium.otf');
+}
+
+
+@theme{
+    --font-avenir: Avenir;
+    --font-montserratreg: MontserratRegular;
+    --font-montserratmed: MontserratMedium;
+}
+
+@theme {
+  --color-yellowgold: #E6CA97;
+  --color-whitegold: #D9D9D9;
+  --color-rosegold: #E1A4A9;
+}
