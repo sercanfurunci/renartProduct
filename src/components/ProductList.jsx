@@ -1,19 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import Product from "./Product";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllProducts } from "../store/productSlice";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 
 function ProductList() {
-  const dispatch = useDispatch();
   const scrollRef = useRef(null);
   const [canScrollRight, setCanScrollRight] = useState(false);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const { products } = useSelector((store) => store.product);
-
-  useEffect(() => {
-    dispatch(getAllProducts());
-  }, [dispatch]);
 
   useEffect(() => {
     const handleScroll = () => {
