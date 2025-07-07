@@ -11,7 +11,11 @@ function Product({ product }) {
   };
 
   const [activeColor, setActiveColor] = useState("yellow");
-  const starCount = (popularityScore * 5).toFixed(1);
+
+  const starScore = popularityScore * 5;
+  const fullStars = Math.floor(starScore);
+  const hasHalfStar =
+    starScore - fullStars >= 0.25 && starScore - fullStars < 0.75;
 
   return (
     <div className="snap-center flex-none w-[90vw] sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 2xl:w-1/4 p-2 sm:p-4">
@@ -48,16 +52,34 @@ function Product({ product }) {
         {activeColor} gold
       </div>
       <div className="font-avenir text-[13px] sm:text-[14px] mb-3 flex items-center">
-        {[...Array(5)].map((_, i) => (
-          <span key={i}>
-            {i < starCount ? (
-              <StarIcon className="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-300" />
-            ) : (
-              <StarOutline className="w-4 h-4 sm:w-5 sm:h-5" />
-            )}
-          </span>
-        ))}
-        <span className="ml-2 text-gray-700">{starCount}/5</span>
+        {[...Array(5)].map((_, i) => {
+          if (i < fullStars) {
+            return (
+              <StarIcon
+                key={i}
+                className="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-300"
+              />
+            );
+          } else if (i === fullStars && hasHalfStar) {
+            return (
+              <div key={i} className="relative w-4 h-4 sm:w-5 sm:h-5">
+                <StarOutline className="absolute top-0 left-0 w-full h-full text-gray-400" />
+                <StarIcon
+                  className="absolute top-0 left-0 w-full h-full fill-yellow-300"
+                  style={{ clipPath: "inset(0 50% 0 0)" }}
+                />
+              </div>
+            );
+          } else {
+            return (
+              <StarOutline
+                key={i}
+                className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400"
+              />
+            );
+          }
+        })}
+        <span className="ml-2 text-gray-700">{starScore.toFixed(1)}/5</span>
       </div>
     </div>
   );
