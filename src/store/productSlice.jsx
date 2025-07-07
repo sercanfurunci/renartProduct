@@ -4,45 +4,20 @@ import axios from "axios";
 const initialState = {
   products: [],
   loading: false,
-  price: 0,
-  goldPrice: 0,
 };
 
 const BASE_URL = "https://product-api-v75n.onrender.com";
-const GOLD_URL = "https://api.gold-api.com/price/XAU";
 
 export const getAllProducts = createAsyncThunk("products", async () => {
   const response = await axios.get(`${BASE_URL}/products`);
   return response.data;
 });
 
-export const getGoldPrice = createAsyncThunk(
-  "products/getGoldPrice",
-  async () => {
-    const response = await axios.get(GOLD_URL, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    return response.data.price;
-  }
-);
-
 export const productSlice = createSlice({
   name: "product",
   initialState,
   reducers: {
     //if there is no http request
-    calculatePrice: (state) => {
-      state.products = state.products.map((item) => ({
-        ...item,
-        price: Number(
-          ((item.popularityScore + 1) * item.weight * state.goldPrice).toFixed(
-            2
-          )
-        ),
-      }));
-    },
   },
   extraReducers: (builder) => {
     //use for http requests
@@ -54,12 +29,8 @@ export const productSlice = createSlice({
         state.products = action.payload;
         state.loading = false;
       });
-
-    builder.addCase(getGoldPrice.fulfilled, (state, action) => {
-      state.goldPrice = action.payload;
-    });
   },
 });
 
-export const { calculatePrice } = productSlice.actions;
+export const {} = productSlice.actions;
 export default productSlice.reducer;
